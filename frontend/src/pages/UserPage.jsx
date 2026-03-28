@@ -10,7 +10,12 @@ function UserPage() {
       setProducts(res.data);
     } catch (error) {
       console.error("Error fetching products:", error);
-      alert("Failed to load products");
+      alert(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to load products"
+      );
     }
   };
 
@@ -40,6 +45,12 @@ function UserPage() {
                 <p><strong>Category:</strong> {product.category}</p>
                 <p><strong>Price:</strong> ₹{product.price}</p>
                 <p><strong>Stock:</strong> {product.stock}</p>
+                <p>
+                  <strong>Created At:</strong>{" "}
+                  {product.created_at
+                    ? new Date(product.created_at).toLocaleString()
+                    : "-"}
+                </p>
               </div>
             </div>
           ))

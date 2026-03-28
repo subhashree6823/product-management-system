@@ -13,7 +13,12 @@ function AdminPage() {
       setProducts(res.data);
     } catch (error) {
       console.error("Error fetching products:", error);
-      alert("Failed to fetch products");
+      alert(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to fetch products"
+      );
     }
   };
 
